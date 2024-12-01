@@ -39,6 +39,22 @@ for (let i = 0; i < img.length; i++) {
     </div>`
 }
 
+reset.addEventListener('click', function () {
+
+    for (let i = img.length - 1; i > 0; i--) {
+
+        let j = Math.floor(Math.random() * (i + 1));
+        [img[i], img[j]] = [img[j], img[i]]
+
+    }
+
+    const tiles = document.querySelectorAll('.tiles img');
+    img.forEach((image, index) => {
+        tiles[index].src = image;
+    });
+
+})
+
 
 
 
