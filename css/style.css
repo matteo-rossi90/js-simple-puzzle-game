@@ -10,6 +10,10 @@ body{
     background-color: rgb(48, 48, 48);
 }
 
+#button-box{
+    padding: 2rem 0;
+}
+
 button{
     padding: 8px 16px;
     border-radius: 20px;
