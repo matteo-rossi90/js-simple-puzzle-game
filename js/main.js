@@ -1,9 +1,21 @@
 
 const img = [
-    './img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg',
-    './img/5.jpg', './img/6.jpg', './img/7.jpg', './img/8.jpg',
-    './img/9.jpg', './img/10.jpg', './img/11.jpg', './img/12.jpg',
-    './img/13.jpg', './img/14.jpg', './img/15.jpg', './img/16.jpg',
+    './img/1.jpg', 
+    './img/2.jpg', 
+    './img/3.jpg', 
+    './img/4.jpg',
+    './img/5.jpg', 
+    './img/6.jpg', 
+    './img/7.jpg', 
+    './img/8.jpg',
+    './img/9.jpg', 
+    './img/10.jpg', 
+    './img/11.jpg', 
+    './img/12.jpg',
+    './img/13.jpg', 
+    './img/14.jpg', 
+    './img/15.jpg', 
+    './img/16.jpg',
 ];
 
 
@@ -77,7 +89,7 @@ function drop(event) {
 
         //controlla se tutte le tessere sono nella posizione corretta
         if (checkWin()) {
-            displayWinMessage();
+            displayWinMessage(); //mostra il messaggio se le tessere sono nella posizione giusta
         }
     }
 }
@@ -96,22 +108,10 @@ function checkWin() {
 
 //crea il messaggio di vittoria
 function displayWinMessage() {
-    const winMessage = document.createElement('div');
-    winMessage.id = 'win-message';
-    winMessage.innerText = 'Congratulazioni, hai vinto!';
-    winMessage.style.position = 'fixed';
-    winMessage.style.top = '50%';
-    winMessage.style.left = '50%';
-    winMessage.style.transform = 'translate(-50%, -50%)';
-    winMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    winMessage.style.color = 'white';
-    winMessage.style.padding = '20px';
-    winMessage.style.borderRadius = '10px';
-    winMessage.style.fontSize = '2rem';
-    winMessage.style.textAlign = 'center';
-    winMessage.style.zIndex = '1000';
+    const message = document.getElementById('win-message')
+    message.style.display = 'block';
+    message.innerHTML = 'Congratulazioni, hai vinto!'
 
-    document.body.appendChild(winMessage);
 }
 
 
