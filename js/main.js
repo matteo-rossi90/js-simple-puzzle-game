@@ -28,6 +28,7 @@ const boardGame = document.getElementById('tiles-box');
 //individuare il pulsante reset
 const reset = document.getElementById('reset');
 
+//all'avvio del gioco rimescola le tessere in ordine casuale
 const  shuffledImages = shuffleArray(img)
 
 //iterare le tessere per inserirle nell'area per poter essere trascinate
@@ -59,6 +60,7 @@ for (let i = 0; i < img.length; i++) {
 
 //// funzioni ////
 
+//rimescola le tessere in ordine casuale
 function shuffleArray(array) {
     const shuffledArray = array.slice(); 
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -99,9 +101,9 @@ function checkWin() {
     const dropZones = document.querySelectorAll('.tiles-drag');
     for (let i = 0; i < dropZones.length; i++) {
         const imgElement = dropZones[i].querySelector('img');
-        if (!imgElement || !imgElement.id) return false; // Controlla se manca una tessera
+        if (!imgElement || !imgElement.id) return false; // controlla se manca una tessera
         const expectedId = `tile-${i + 1}`;
-        if (imgElement.id !== expectedId) return false; // Controlla se l'ID corrisponde
+        if (imgElement.id !== expectedId) return false; // controlla se l'ID corrisponde
     }
     return true; // Tutte le tessere sono al posto giusto
 }
