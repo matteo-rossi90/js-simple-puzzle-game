@@ -15,4 +15,4 @@ Si tratta di una fase iniziale di un progetto che vorrei portare avanti, per cui
 - aggiungere nuovi livelli di difficoltà
 - aggiungere più immagini da scegliere
 
-L'idea di questo mini gioco nasce dalla volontà di esercitarsi nella logica JavaScript e nell'implementare nuove funzioni. Per quanto apparentemente banale e semplice nell'idea, realizzarlo non è stato facile e mi ha aiutato a consolidare conoscenze e ad affinare il ragionamento.
+L'idea di questo mini gioco nasce dalla volontà di esercitarsi nella logica JavaScript e nell'implementare nuove funzioni. Per quanto apparentemente banale e semplice nell'idea, realizzarlo non è stato facile ma mi ha aiutato a consolidare le conoscenze pregresse e ad affinare il ragionamento logico.
