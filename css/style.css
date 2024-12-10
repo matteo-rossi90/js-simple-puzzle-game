@@ -20,19 +20,37 @@ body{
     color: var(--color-white);
     font-weight: 600;
     font-size: 4rem;
+    padding-bottom: 1.5rem;
+}
+
+#box-btn{
+    padding-bottom: 1.5rem;
+}
+
+#reset{
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid var(--color-white);
+    background-color:transparent;
+    color: var(--color-white);
+    cursor: pointer;
+}
+
+#reset:hover{
+    background-color: var(--color-white);
+    color: var(--color-dark-bg);
 }
 
 #guide{
     color: var(--color-white);
-    padding: 2rem;
+    padding-bottom: 1.5rem;
 }
 
 #guide p{
     text-align: left;
-    margin-bottom: 1rem;
+    margin: 0 auto;
+    width: 90%;
 }
-
-
 
 #container{
     width: 60%;
@@ -82,7 +100,7 @@ img{
     object-fit: cover;
 }
 
-#win-message {
+#message {
     display: none;
     position: fixed;
     top: 50%;

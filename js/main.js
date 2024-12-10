@@ -47,6 +47,11 @@ for (let i = 0; i < shuffledImages.length; i++) {
     boardGame.appendChild(tile); //integrare l'elemento blocco all'area di gioco dove si pescano le tessere
 }
 
+//pulsante per iniziare una nuova partita
+reset.addEventListener('click', function() {
+    location.reload(); 
+});
+
 //iterare le tessere nell'area principale di gioco
 for (let i = 0; i < img.length; i++) {
 
@@ -89,9 +94,20 @@ function drop(event) {
     if (!event.target.querySelector('img')) {
         event.target.appendChild(draggedElement);
 
-        //controlla se tutte le tessere sono nella posizione corretta
-        if (checkWin()) {
-            displayWinMessage(); //mostra il messaggio se le tessere sono nella posizione giusta
+        //se sono state inserite tutte le tessere
+        if(isBoardFull()){
+
+            //controlla se tutte le tessere sono nella posizione corretta
+            if (checkWin()) {
+                const message = document.getElementById('message')
+                message.style.display = 'block';
+                message.innerHTML = 'Congratulazioni, hai vinto!' //mostra il messaggio se le tessere sono nella posizione giusta
+            } else {
+                const message = document.getElementById('message')
+                message.style.display = 'block';
+                message.innerHTML = 'Game over!' //mostra il messaggio se le tessere sono nella posizione sbagliata
+            }
+
         }
     }
 }
@@ -105,15 +121,16 @@ function checkWin() {
         const expectedId = `tile-${i + 1}`;
         if (imgElement.id !== expectedId) return false; // controlla se l'ID corrisponde
     }
-    return true; // Tutte le tessere sono al posto giusto
+    return true; // tutte le tessere sono al posto giusto
 }
 
-//crea il messaggio di vittoria
-function displayWinMessage() {
-    const message = document.getElementById('win-message')
-    message.style.display = 'block';
-    message.innerHTML = 'Congratulazioni, hai vinto!'
-
+//permette di capire se sono presenti tutte le tessere
+function isBoardFull() {
+    const dropZones = document.querySelectorAll('.tiles-drag');
+    for (let i = 0; i < dropZones.length; i++) {
+        if (!dropZones[i].querySelector('img')) return false; //verifica se manca una tessere
+    }
+    return true;
 }
 
 

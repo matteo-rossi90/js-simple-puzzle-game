@@ -1,4 +1,5 @@
 Piccolo puzzle sviluppato in HTML, CSS e JavaScript. Il giocatore ha delle tessere disposte in ordine casuale a destra e lo scopo è trascinarle nel lato sinistro per ricostruire l'immagine originale.
+Un pulsante permette di riavviare il gioco.
 
 Per creare questo mini gioco ho seguito diversi step:
 1) ho creato il markup di base in html e css per testarne gli effetti visivi
