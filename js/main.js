@@ -1,22 +1,10 @@
 
 const img = [
-    './img/1.jpg',
-    './img/2.jpg',
-    './img/3.jpg',
-    './img/4.jpg',
-    './img/5.jpg',
-    './img/6.jpg',
-    './img/7.jpg',
-    './img/8.jpg',
-    './img/9.jpg',
-    './img/10.jpg',
-    './img/11.jpg',
-    './img/12.jpg',
-    './img/13.jpg',
-    './img/14.jpg',
-    './img/15.jpg',
-    './img/16.jpg',
-]
+    './img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg',
+    './img/5.jpg', './img/6.jpg', './img/7.jpg', './img/8.jpg',
+    './img/9.jpg', './img/10.jpg', './img/11.jpg', './img/12.jpg',
+    './img/13.jpg', './img/14.jpg', './img/15.jpg', './img/16.jpg',
+];
 
 
 //individuare l'area in cui le tiles vengono trascinate le tessere
@@ -28,16 +16,18 @@ const boardGame = document.getElementById('tiles-box');
 //individuare il pulsante reset
 const reset = document.getElementById('reset');
 
+const  shuffledImages = shuffleArray(img)
+
 //iterare le tessere per inserirle nell'area per poter essere trascinate
-for (let i = 0; i < img.length; i++) {
+for (let i = 0; i < shuffledImages.length; i++) {
     
     const tile = document.createElement('div'); // creare un elemento blocco
     tile.classList.add('tiles'); //aggiungere la classe tiles nell'elemento blocco
 
     const imgElement = document.createElement('img'); //inserire l'elemento img
-    imgElement.src = img[i]; //inserire l'elemento src delle singole immagini
+    imgElement.src = shuffledImages[i]; //inserire l'elemento src delle singole immagini
     imgElement.draggable = true; //inserire nel markup l'attributo draggable
-    imgElement.id = `tile-${i}`; //inserire l'id della singola tessera
+    imgElement.id = `tile-${parseInt(shuffledImages[i].match(/\d+/)[0])}`; //inserire l'id della singola tessera
     imgElement.addEventListener('dragstart', drag); //impostare la capacità di trascinare le tessere grazie alla funzione
 
     tile.appendChild(imgElement); // integrare tutti gli elementi all'elemento blocco
@@ -55,30 +45,16 @@ for (let i = 0; i < img.length; i++) {
     boardBox.appendChild(dropZone); // inserire tutti gli elementi nell'area di gioco
 }
 
-// al click del pulsante reset le tessere si riordinano casualmente
-reset.addEventListener('click', function () {
-
-    // rovesciare e rimescolare le tiles
-    for (let i = img.length - 1; i > 0; i--) {
-
-        let j = Math.floor(Math.random() * (i + 1));
-        [img[i], img[j]] = [img[j], img[i]]
-
-    }
-
-    //selezionare tutte le classi tiles
-    const tiles = document.querySelectorAll('.tiles');
-
-    //riposizionare le tessere nel contenitore originale
-    tiles.forEach((tile, index) => {
-        const imgElement = tile.querySelector('img');
-        imgElement.src = img[index];
-        boardGame.appendChild(tile); 
-    });
-
-})
-
 //// funzioni ////
+
+function shuffleArray(array) {
+    const shuffledArray = array.slice(); 
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray
+}
 
 //consente allo spazio apposito il drop delle tessere
 function allowDrop(event) {
@@ -98,8 +74,47 @@ function drop(event) {
 
     if (!event.target.querySelector('img')) {
         event.target.appendChild(draggedElement);
+
+        //controlla se tutte le tessere sono nella posizione corretta
+        if (checkWin()) {
+            displayWinMessage();
+        }
     }
 }
+
+//permette di verificare se c'è condizione di vittoria
+function checkWin() {
+    const dropZones = document.querySelectorAll('.tiles-drag');
+    for (let i = 0; i < dropZones.length; i++) {
+        const imgElement = dropZones[i].querySelector('img');
+        if (!imgElement || !imgElement.id) return false; // Controlla se manca una tessera
+        const expectedId = `tile-${i + 1}`;
+        if (imgElement.id !== expectedId) return false; // Controlla se l'ID corrisponde
+    }
+    return true; // Tutte le tessere sono al posto giusto
+}
+
+//crea il messaggio di vittoria
+function displayWinMessage() {
+    const winMessage = document.createElement('div');
+    winMessage.id = 'win-message';
+    winMessage.innerText = 'Congratulazioni, hai vinto!';
+    winMessage.style.position = 'fixed';
+    winMessage.style.top = '50%';
+    winMessage.style.left = '50%';
+    winMessage.style.transform = 'translate(-50%, -50%)';
+    winMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    winMessage.style.color = 'white';
+    winMessage.style.padding = '20px';
+    winMessage.style.borderRadius = '10px';
+    winMessage.style.fontSize = '2rem';
+    winMessage.style.textAlign = 'center';
+    winMessage.style.zIndex = '1000';
+
+    document.body.appendChild(winMessage);
+}
+
+
 
 
 
